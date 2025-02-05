@@ -1,0 +1,312 @@
+---
+title: "Visualização - Remuneração base"
+subtitle: "Análises semânticas"
+author: "Joellen Silva"
+date: "today"
+date-format: "D.MMM.YYYY"
+date-modified: "last-modified"
+lang: pt-BR
+format:
+  html:
+    html-math-method: katex
+    css: style.css
+    anchor-sections: true
+    code-fold: true
+    code-tools: true
+    code-link: true
+    code-line-numbers: true
+    code-background: false
+    code-summary: "Código"
+    toc: true
+    toc-title: "Índice"
+    toc-depth: 4
+    toc-float: false
+    toc-collapsed: false
+    footnotes-hover: true
+    smooth-scroll: true
+    fig-width: 11
+    fig-height: 7
+    search: true
+    embed-resources: true
+    theme:
+          light: cosmo
+          dark: darkly
+knitr:
+  opts_chunk:
+    echo: true
+    collapse: true
+    message: false
+    warning: false
+    comment: "#>"
+editor_options:
+  chunk_output_type: console
+execute:
+  cache: false
+---
+
+```{r}
+#| label: libs-and-sources
+library(tidyverse)
+library(here)
+library(gt)
+library(ggiraph)
+library(glue)
+library(scales)
+library(plotly)
+library(dplyr)
+library(zoo)
+library(ggplot2)
+options(scipen = 999)
+
+source(here("tasks/view-remuneracao-base/src/00-plot-aesthetics.R"), encoding = "utf-8")
+```
+
+## Resumo
+
+Este relatório tem como objetivo analisar a soma das remunerações mensais de todos os membros por órgão, considerando apenas a remuneração básica, excluindo benefícios.
+
+Principais resultados:
+
+- Tendências na Remuneração
+  - Identificação de flutuações na remuneração mensal por órgão.
+- Comparação com Médias Móveis
+  - Meses em que a remuneração superou a média móvel dos últimos três anos para o mesmo mês.
+  - Meses em que a remuneração ultrapassou a média móvel dos últimos três meses.
+
+## Metodologia
+
+Para cada mês, o somatório da remuneração base será comparada com duas médias móveis:
+
+- A média móvel dos últimos três anos para o mesmo mês.
+- A média móvel dos últimos três meses em relação ao mês atual.
+
+Além da visualização gráfica, será apresentada uma tabela destacando os meses em que a soma das remunerações ultrapassou uma das médias comparativas, especificando qual delas foi superada.
+
+## Análise
+
+:::{.callout-tip}
+### Extração dos dados
+Os dados foram agrupados utilizando a query: `./tasks/view-remuneracao-base/src/01-extracao.sql`
+:::
+
+```{r}
+#| label: print-dataset
+
+data <- readRDS(here(glue("tasks/view-remuneracao-base/outputs/extracao-{today()}.rds")))
+
+
+df <- data %>%
+  arrange(ano, mes) %>%
+  filter(id_orgao == "cnj") %>%
+  mutate(ano_mes = sprintf("%d/%02d", ano, mes)) %>%
+  mutate(media_movel_3_meses = lag(rollapply(valor, width = 3, FUN = mean, fill = NA, align = "right"))) %>%
+  group_by(mes) %>%
+  mutate(media_movel_3_anos = lag(rollapply(valor, width = 3, FUN = mean, fill = NA, align = "right"))) %>%
+  ungroup()
+
+```
+
+### Visualização Médias Móveis
+
+Apresenta-se a análise das médias móveis da remuneração mensal, considerando duas abordagens:
+
+- Média móvel dos últimos 3 meses para cada mês
+- Média do mesmo mês nos últimos 3 anos
+
+Para ilustrar essas comparações, foram geradas duas opções de visualização:
+
+- Opção 1: Dois gráficos separados, cada um representando uma das médias móveis individualmente.
+- Opção 2: Um único gráfico combinando ambas as médias para facilitar a análise conjunta.
+
+Qual abordagem adotar?
+
+#### @fig-barras-mm3m
+
+:::{.callout-tip}
+📊 Gráfico interativo, use o mouse para ver detalhes dos dados.
+:::
+
+A seguir, apresentamos a visualização dos somatórios da remuneração base por mês e ano, acompanhada da média móvel dos últimos três meses em relação ao mês atual. Essa análise permite identificar variações sazonais e tendências ao longo do período analisado.
+
+::: {.callout-note}
+### Legenda:
+- 🔴 **Média Móvel 3 Meses**: Representa a média dos 3 meses anteriores.
+:::
+```{r}
+#| label: fig-barras-mm3m
+#| fig-cap: "Gráfico Remuneração Base - Média Móvel 3 Meses"
+grafico_mm3m <- ggplot(df, aes(x = ano_mes, y = valor, text = paste0("Ano/Mês: ", ano_mes, "<br>Valor: R$ ", scales::comma(valor, accuracy = 0.1), "<br>Média 3 meses: R$ ", scales::comma(media_movel_3_meses, accuracy = 0.1)))) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_errorbar(aes(ymin = media_movel_3_meses, ymax = media_movel_3_meses),
+    width = 2.5, color = "red", linewidth = 1.2, na.rm = TRUE
+  ) +
+  labs(title = "Somatório Remuneração Base - Média Móvel 3 Meses", x = "Ano/Mês", y = "Valor") +
+  theme_minimal()
+
+grafico_interativo_mm3m <- ggplotly(grafico_mm3m, tooltip = "text")
+
+grafico_interativo_mm3m %>%
+  layout(
+    xaxis = list(
+      tickmode = "array",
+      tickvals = df$ano_mes,
+      ticktext = df$ano_mes,
+      rangeslider = list(visible = TRUE),
+      range = c(length(df$ano_mes) - 11.5, length(df$ano_mes) + 0.5),
+      tickangle = 90
+    ),
+    yaxis = list(
+      tickformat = ",.0f",
+      showgrid = TRUE
+    ),
+    dragmode = "pan",
+    autosize = TRUE
+  )
+```
+
+#### @fig-barras-mm3a
+
+:::{.callout-tip}
+📊 Gráfico interativo, use o mouse para ver detalhes dos dados.
+:::
+
+A seguir, apresentamos a visualização dos somatórios da remuneração base por mês e ano, juntamente com a média móvel dos últimos três anos para o mesmo mês. Essa análise permite avaliar a variação das remunerações ao longo do tempo e identificar possíveis tendências ou anomalias.
+
+::: {.callout-note}
+### Legenda:
+- 🔴 **Média Móvel 3 Anos**: Representa a média do mesmo mês nos 3 anos anteriores.
+:::
+
+```{r}
+#| label: fig-barras-mm3a
+#| fig-cap: "Gráfico Remuneração Base - Média Móvel 3 Anos/Mês"
+grafico_mm3a <- ggplot(df, aes(x = ano_mes, y = valor, text = paste0("Ano/Mês: ", ano_mes, "<br>Valor: R$ ", scales::comma(valor, accuracy = 0.1), "<br>Média 3 anos: R$ ", scales::comma(media_movel_3_anos, accuracy = 0.1)))) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_errorbar(aes(ymin = media_movel_3_anos, ymax = media_movel_3_anos),
+    width = 2.5, color = "red", linewidth = 1.2, na.rm = TRUE
+  ) +
+  labs(
+    title = "Somatório Remuneração Base - Média Móvel 3 Anos",
+    x = "Ano/Mês", y = "Valor"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 10))
+
+grafico_interativo_mm3a <- ggplotly(grafico_mm3a, tooltip = "text")
+
+grafico_interativo_mm3a %>%
+  layout(
+    xaxis = list(
+      tickmode = "array",
+      tickvals = df$ano_mes,
+      ticktext = df$ano_mes,
+      rangeslider = list(visible = TRUE),
+      range = c(length(df$ano_mes) - 11.5, length(df$ano_mes) + 0.5),
+      tickangle = 90
+    ),
+    yaxis = list(
+      tickformat = ",",
+      showgrid = TRUE
+    ),
+    dragmode = "pan",
+    autosize = TRUE
+  )
+```
+
+#### @fig-barras-mm
+
+:::{.callout-tip}
+📊 Gráfico interativo, use o mouse para ver detalhes dos dados.
+:::
+
+A seguir, apresentamos a visualização dos somatórios da remuneração base por mês e ano, acompanhados de duas médias móveis:
+
+- Média móvel dos últimos três meses em relação ao mês atual
+- Média móvel dos últimos três anos para o mesmo mês
+
+::: {.callout-note}
+### Legenda:
+- 🟢 **Média Móvel 3 Anos**: Representa a média do mesmo mês nos 3 anos anteriores.
+- 🔴 **Média Móvel 3 Meses**: Representa a média dos 3 meses anteriores.
+:::
+
+```{r}
+#| label: fig-barras-mm
+#| fig-cap: "Gráfico Remuneração Base - Médias Móveis 3 Anos e 3 Meses"
+grafico_mm <- ggplot(df, aes(x = ano_mes, y = valor, text = paste0("Ano/Mês: ", ano_mes, "<br>Valor: R$ ", scales::comma(valor, accuracy = 0.1), "<br>Média 3 meses: R$ ", scales::comma(media_movel_3_meses, accuracy = 0.1), "<br>Média 3 anos: R$ ", scales::comma(media_movel_3_anos, accuracy = 0.1)))) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  geom_errorbar(aes(ymin = media_movel_3_anos, ymax = media_movel_3_anos, color = "Média Móvel 3 Anos", text = paste0("<br>Média 3 anos: R$ ", scales::comma(media_movel_3_anos, accuracy = 0.1))),
+    width = 2.5, color = "green", linewidth = 1.2, na.rm = TRUE
+  ) +
+  geom_errorbar(aes(ymin = media_movel_3_meses, ymax = media_movel_3_meses, color = "Média Móvel 3 Meses", , text = paste0("<br>Média 3 meses: R$ ", scales::comma(media_movel_3_meses, accuracy = 0.1))),
+    width = 2.5, color = "red", linewidth = 1.2, na.rm = TRUE
+  ) +
+  scale_color_manual(values = c("Média Móvel 3 Anos" = "green", "Média Móvel 3 Meses" = "red")) +
+  labs(
+    title = "Somatório Remuneração Base - Média Móvel 3 Anos e 3 Meses",
+    x = "Ano/Mês", y = "Valor", color = "Legenda"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 10))
+
+grafico_interativo_mm <- ggplotly(grafico_mm, tooltip = "text")
+
+grafico_interativo_mm %>%
+  layout(
+    xaxis = list(
+      tickmode = "array",
+      tickvals = df$ano_mes,
+      ticktext = df$ano_mes,
+      rangeslider = list(visible = TRUE),
+      range = c(length(df$ano_mes) - 11.5, length(df$ano_mes) + 0.5),
+      tickangle = 90
+    ),
+    yaxis = list(
+      tickformat = ",.0f",
+      showgrid = TRUE
+    ),
+    dragmode = "pan",
+    autosize = TRUE
+  )
+```
+
+#### @tbl-meses-que-ultrapassaram-mm
+
+A tabela abaixo apresenta um resumo dos meses dentro do período analisado em que a soma da remuneração base ultrapassou pelo menos uma das médias móveis. Para cada ocorrência, é indicado qual das médias foi superada.
+```{r}
+#| label: tbl-meses-que-ultrapassaram-mm
+#| tbl-cap: "Meses que Ultrapassaram Médias Móveis"
+tabela <- df %>%
+  filter(!is.na(media_movel_3_meses), !is.na(media_movel_3_anos)) %>%
+  filter(valor > media_movel_3_meses | valor > media_movel_3_anos) %>%
+  mutate(
+    maior_que = case_when(
+      valor > media_movel_3_meses & valor < media_movel_3_anos ~ "media_movel_3_meses",
+      valor > media_movel_3_anos & valor < media_movel_3_meses ~ "media_movel_3_anos",
+      valor > media_movel_3_meses & valor > media_movel_3_anos ~ "ambas"
+    )
+  )
+
+tabela %>%
+  summarise(
+    ano = ano,
+    mes = mes,
+    somatoria = valor,
+    maior_que = maior_que
+  ) %>%
+  arrange(-ano) %>%
+  gt(groupname_col = "") %>%
+  fmt_currency_brl(columns = somatoria) %>%
+  tab_style(
+    style = cell_text(size = pct(65)),
+    locations = cells_body(columns = maior_que)
+  ) %>%
+  tab_style(
+    style = cell_text(size = pct(75)),
+    locations = cells_body(columns = maior_que)
+  ) %>%
+  tab_options(table.width = pct(100)) %>%
+  opt_interactive(use_search = TRUE, use_highlight = TRUE)
+```
+
+<!--  -->
