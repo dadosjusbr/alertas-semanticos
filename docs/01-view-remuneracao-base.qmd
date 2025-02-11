@@ -31,7 +31,6 @@ format:
     theme:
           light: cosmo
           dark: darkly
-server: shiny
 knitr:
   opts_chunk:
     echo: true
@@ -77,16 +76,7 @@ Principais resultados:
   - Meses em que a remuneração superou a média móvel dos últimos três anos para o mesmo mês.
   - Meses em que a remuneração ultrapassou a média móvel dos últimos três meses.
 
-## Metodologia
-
-Para cada mês, o somatório da remuneração base será comparada com duas médias móveis:
-
-- A média móvel dos últimos três anos para o mesmo mês.
-- A média móvel dos últimos três meses em relação ao mês atual.
-
-Além da visualização gráfica, será apresentada uma tabela destacando os meses em que a soma das remunerações ultrapassou uma das médias comparativas, especificando qual delas foi superada.
-
-## Análise
+## Dados
 
 :::{.callout-tip}
 ### Extração dos dados
@@ -107,19 +97,13 @@ df <- data %>%
   group_by(mes) %>%
   mutate(media_movel_3_anos = lag(rollapply(valor, width = 3, FUN = mean, fill = NA, align = "right"))) %>%
   ungroup() %>%
-  filter(id_orgao %in% c("cnj", "tjal"))
+  filter(id_orgao %in% c("cnj"))
 
-# print(df %>% filter(id_orgao == "tjal" & mes==11), n=100)
 ```
 
 ### Visualização Médias Móveis
 
-Apresenta-se a análise das médias móveis da remuneração mensal, considerando duas abordagens:
-
-- Média móvel dos últimos 3 meses para cada mês
-- Média do mesmo mês nos últimos 3 anos
-
-#### Gráfico
+#### @fig-barras-mm
 
 :::{.callout-tip}
 📊 Gráfico interativo, use o mouse para ver detalhes dos dados.
@@ -132,34 +116,9 @@ Apresenta-se a análise das médias móveis da remuneração mensal, considerand
 :::
 
 ```{r}
-#| context: server
-
-choices <- unique(df$id_orgao)
-selected <- unique(df$id_orgao)[1]
-
-ui <- fluidPage(
-  titlePanel("Gráfico Interativo - Média Móvel"),
-  
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("orgao_selecionado", "Selecione o Órgão:", 
-                  choices = choices, 
-                  selected = selected)
-    ),
-    
-    mainPanel(
-      plotlyOutput("grafico_interativo_mm")
-    )
-  )
-)
-
-server <- function(input, output) {
-  df_filtrado <- reactive({
-    df[df$id_orgao == input$orgao_selecionado, ]
-  })
-  
-output$grafico_interativo_mm <- renderPlotly({
-grafico_mm <- ggplot(df_filtrado(), aes(x = ano_mes, y = valor, text = paste0("Ano/Mês: ", ano_mes, "<br>Valor: R$ ", scales::comma(valor, accuracy = 0.1), "<br>Média 3 meses: R$ ", scales::comma(media_movel_3_meses, accuracy = 0.1), "<br>Média 3 anos: R$ ", scales::comma(media_movel_3_anos, accuracy = 0.1)))) +
+#| label: fig-barras-mm
+#| fig-cap: "Gráfico Remuneração Base - Médias Móveis 3 Anos e 3 Meses"
+grafico_mm <- ggplot(df, aes(x = ano_mes, y = valor, text = paste0("Ano/Mês: ", ano_mes, "<br>Valor: R$ ", scales::comma(valor, accuracy = 0.1), "<br>Média 3 meses: R$ ", scales::comma(media_movel_3_meses, accuracy = 0.1), "<br>Média 3 anos: R$ ", scales::comma(media_movel_3_anos, accuracy = 0.1)))) +
   geom_bar(stat = "identity", fill = "steelblue") +
   geom_errorbar(aes(ymin = media_movel_3_anos, ymax = media_movel_3_anos, color = "Média Móvel 3 Anos", text = paste0("<br>Média 3 anos: R$ ", scales::comma(media_movel_3_anos, accuracy = 0.1))),
     width = 2.5, color = "green", linewidth = 1.2, na.rm = TRUE
@@ -169,11 +128,11 @@ grafico_mm <- ggplot(df_filtrado(), aes(x = ano_mes, y = valor, text = paste0("A
   ) +
   scale_color_manual(values = c("Média Móvel 3 Anos" = "green", "Média Móvel 3 Meses" = "red")) +
   labs(
-    title = paste("Somatório Remuneração Base - Média Móvel 3 Anos e 3 Meses |", toupper(input$orgao_selecionado)),
+    title = "Somatório Remuneração Base - Média Móvel 3 Anos e 3 Meses",
     x = "Ano/Mês", y = "Valor", color = "Legenda"
   ) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 10))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 8))
 
 grafico_interativo_mm <- ggplotly(grafico_mm, tooltip = "text")
 
@@ -181,25 +140,19 @@ grafico_interativo_mm %>%
   layout(
     xaxis = list(
       tickmode = "array",
-      tickvals = df_filtrado()$ano_mes,
-      ticktext = df_filtrado()$ano_mes,
+      tickvals = df$ano_mes,
+      ticktext = df$ano_mes,
       rangeslider = list(visible = TRUE),
-      range = c(length(df_filtrado()$ano_mes) - 11.5, length(df_filtrado()$ano_mes) + 0.5),
-      tickangle = 90
+      range = c(length(df$ano_mes) - 11.5, length(df$ano_mes) + 0.5),
+      tickangle = 90,
+      showticklabels = TRUE
     ),
     yaxis = list(
-      tickformat = ",.0f",
       showgrid = TRUE
     ),
     dragmode = "pan",
     autosize = TRUE
   )
-
-    return(grafico_interativo_mm)
-    })
-}
-
-shinyApp(ui, server)
 ```
 
 #### @tbl-meses-que-ultrapassaram-mm
