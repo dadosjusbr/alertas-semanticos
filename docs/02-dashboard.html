@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Alertas semânticos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="02-dashboard_files/libs/clipboard/clipboard.min.js"></script>
+<script src="02-dashboard_files/libs/quarto-html/quarto.js"></script>
+<script src="02-dashboard_files/libs/quarto-html/popper.min.js"></script>
+<script src="02-dashboard_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="02-dashboard_files/libs/quarto-html/anchor.min.js"></script>
+<link href="02-dashboard_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="02-dashboard_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="02-dashboard_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="02-dashboard_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="02-dashboard_files/libs/bootstrap/bootstrap-a23d63ef1abe7d502b9940799573d78b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="02-dashboard_files/libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="02-dashboard_files/libs/quarto-dashboard/stickythead.js"></script>
+<script src="02-dashboard_files/libs/quarto-dashboard/datatables.min.js" kdttablesentinel="true"></script>
+<script src="02-dashboard_files/libs/quarto-dashboard/pdfmake.min.js" kdttablesentinel="true"></script>
+<script src="02-dashboard_files/libs/quarto-dashboard/vfs_fonts.js" kdttablesentinel="true"></script>
+<script src="02-dashboard_files/libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="02-dashboard_files/libs/quarto-dashboard/components.js"></script>
+<link href="02-dashboard_files/libs/quarto-dashboard/datatables.min.css" rel="stylesheet" kdttablesentinel="true">
+
+
+</head>
+
+<body class="quarto-dashboard dashboard-fill fullcontent">
+
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler hidden" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+    <div class="navbar-brand-container">       
+
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">Alertas semânticos</a></div>
+        
+        
+      </div>
+    </div>
+</div>
+</nav>
+</header>
+<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill">  
+
+<div class="bslib-grid-item html-fill-item bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card tabset bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-header bslib-navs-card-title"><div class="card-title"><span style="display: inline">
+
+</span></div><ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-1"><li class="nav-item" role="presentation"><a href="#card-tabset-1-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Conselhos de Justiça" aria-selected="true" class="nav-link active">Conselhos de Justiça</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Justiça Eleitoral" aria-selected="false" class="nav-link">Justiça Eleitoral</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-3" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Justiça Estadual" aria-selected="false" class="nav-link">Justiça Estadual</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-4" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Justiça Federal" aria-selected="false" class="nav-link">Justiça Federal</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-5" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Justiça Militar" aria-selected="false" class="nav-link">Justiça Militar</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-6" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Justiça Superior" aria-selected="false" class="nav-link">Justiça Superior</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-7" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Justiça do Trabalho" aria-selected="false" class="nav-link">Justiça do Trabalho</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-1-8" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Ministérios Públicos" aria-selected="false" class="nav-link">Ministérios Públicos</a></li></ul></div>
+
+
+
+
+
+
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-1"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-1"><div class="card-body html-fill-item html-fill-container" data-title="Conselhos de Justiça">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-header bslib-navs-card-title"><div class="card-title"><span style="display: inline">
+
+</span></div><ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-2"><li class="nav-item" role="presentation"><a href="#card-tabset-2-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="CJF" aria-selected="true" class="nav-link active">CJF</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-2-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="CNJ" aria-selected="false" class="nav-link">CNJ</a></li></ul></div>
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-2"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-2-1"><div class="card-body html-fill-item html-fill-container" data-title="CJF">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/ConselhosdeJustiçaCJF-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-2-2"><div class="card-body html-fill-item html-fill-container" data-title="CNJ">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/ConselhosdeJustiçaCNJ-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div></div><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-2"><div class="card-body html-fill-item html-fill-container" data-title="Justiça Eleitoral">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-header bslib-navs-card-title"><div class="card-title"><span style="display: inline">
+
+</span></div><ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-5"><li class="nav-item" role="presentation"><a href="#card-tabset-5-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-AC" aria-selected="true" class="nav-link active">TRE-AC</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-AL" aria-selected="false" class="nav-link">TRE-AL</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-3" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-AM" aria-selected="false" class="nav-link">TRE-AM</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-4" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-AP" aria-selected="false" class="nav-link">TRE-AP</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-5" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-BA" aria-selected="false" class="nav-link">TRE-BA</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-6" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-CE" aria-selected="false" class="nav-link">TRE-CE</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-7" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-DF" aria-selected="false" class="nav-link">TRE-DF</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-8" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-ES" aria-selected="false" class="nav-link">TRE-ES</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-9" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-GO" aria-selected="false" class="nav-link">TRE-GO</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-10" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-MA" aria-selected="false" class="nav-link">TRE-MA</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-11" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-MG" aria-selected="false" class="nav-link">TRE-MG</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-12" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-MS" aria-selected="false" class="nav-link">TRE-MS</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-13" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-MT" aria-selected="false" class="nav-link">TRE-MT</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-14" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-PA" aria-selected="false" class="nav-link">TRE-PA</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-15" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-PB" aria-selected="false" class="nav-link">TRE-PB</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-16" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-PE" aria-selected="false" class="nav-link">TRE-PE</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-17" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-PI" aria-selected="false" class="nav-link">TRE-PI</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-18" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-PR" aria-selected="false" class="nav-link">TRE-PR</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-19" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-RJ" aria-selected="false" class="nav-link">TRE-RJ</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-20" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-RN" aria-selected="false" class="nav-link">TRE-RN</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-21" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-RO" aria-selected="false" class="nav-link">TRE-RO</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-22" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-RR" aria-selected="false" class="nav-link">TRE-RR</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-23" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-RS" aria-selected="false" class="nav-link">TRE-RS</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-24" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-SC" aria-selected="false" class="nav-link">TRE-SC</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-25" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-SE" aria-selected="false" class="nav-link">TRE-SE</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-26" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-SP" aria-selected="false" class="nav-link">TRE-SP</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-5-27" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRE-TO" aria-selected="false" class="nav-link">TRE-TO</a></li></ul></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-5"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-1"><div class="card-body html-fill-item html-fill-container" data-title="TRE-AC">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-AC-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-2"><div class="card-body html-fill-item html-fill-container" data-title="TRE-AL">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-AL-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-3"><div class="card-body html-fill-item html-fill-container" data-title="TRE-AM">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-AM-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-4"><div class="card-body html-fill-item html-fill-container" data-title="TRE-AP">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-AP-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-5"><div class="card-body html-fill-item html-fill-container" data-title="TRE-BA">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-BA-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-6"><div class="card-body html-fill-item html-fill-container" data-title="TRE-CE">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-CE-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-7"><div class="card-body html-fill-item html-fill-container" data-title="TRE-DF">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-DF-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-8"><div class="card-body html-fill-item html-fill-container" data-title="TRE-ES">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-ES-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-9"><div class="card-body html-fill-item html-fill-container" data-title="TRE-GO">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-GO-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-10"><div class="card-body html-fill-item html-fill-container" data-title="TRE-MA">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-MA-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-11"><div class="card-body html-fill-item html-fill-container" data-title="TRE-MG">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-MG-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-12"><div class="card-body html-fill-item html-fill-container" data-title="TRE-MS">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-MS-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-13"><div class="card-body html-fill-item html-fill-container" data-title="TRE-MT">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-MT-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-14"><div class="card-body html-fill-item html-fill-container" data-title="TRE-PA">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-PA-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-15"><div class="card-body html-fill-item html-fill-container" data-title="TRE-PB">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-PB-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-16"><div class="card-body html-fill-item html-fill-container" data-title="TRE-PE">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-PE-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-17"><div class="card-body html-fill-item html-fill-container" data-title="TRE-PI">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-PI-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-18"><div class="card-body html-fill-item html-fill-container" data-title="TRE-PR">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-PR-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-19"><div class="card-body html-fill-item html-fill-container" data-title="TRE-RJ">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-RJ-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-20"><div class="card-body html-fill-item html-fill-container" data-title="TRE-RN">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-RN-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-21"><div class="card-body html-fill-item html-fill-container" data-title="TRE-RO">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-RO-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-22"><div class="card-body html-fill-item html-fill-container" data-title="TRE-RR">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-RR-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-23"><div class="card-body html-fill-item html-fill-container" data-title="TRE-RS">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-RS-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-24"><div class="card-body html-fill-item html-fill-container" data-title="TRE-SC">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-SC-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-25"><div class="card-body html-fill-item html-fill-container" data-title="TRE-SE">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-SE-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-26"><div class="card-body html-fill-item html-fill-container" data-title="TRE-SP">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-SP-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-5-27"><div class="card-body html-fill-item html-fill-container" data-title="TRE-TO">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEleitoralTRE-TO-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div></div><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-3"><div class="card-body html-fill-item html-fill-container" data-title="Justiça Estadual">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-header bslib-navs-card-title"><div class="card-title"><span style="display: inline">
+
+</span></div><ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-33"><li class="nav-item" role="presentation"><a href="#card-tabset-33-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-AC" aria-selected="true" class="nav-link active">TJ-AC</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-AL" aria-selected="false" class="nav-link">TJ-AL</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-3" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-AM" aria-selected="false" class="nav-link">TJ-AM</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-4" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-AP" aria-selected="false" class="nav-link">TJ-AP</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-5" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-BA" aria-selected="false" class="nav-link">TJ-BA</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-6" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-CE" aria-selected="false" class="nav-link">TJ-CE</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-7" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-DFT" aria-selected="false" class="nav-link">TJ-DFT</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-8" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-ES" aria-selected="false" class="nav-link">TJ-ES</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-9" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-GO" aria-selected="false" class="nav-link">TJ-GO</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-10" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-MA" aria-selected="false" class="nav-link">TJ-MA</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-11" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-MG" aria-selected="false" class="nav-link">TJ-MG</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-12" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-MS" aria-selected="false" class="nav-link">TJ-MS</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-13" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-MT" aria-selected="false" class="nav-link">TJ-MT</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-14" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-PA" aria-selected="false" class="nav-link">TJ-PA</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-15" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-PB" aria-selected="false" class="nav-link">TJ-PB</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-16" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-PE" aria-selected="false" class="nav-link">TJ-PE</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-17" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-PI" aria-selected="false" class="nav-link">TJ-PI</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-18" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-PR" aria-selected="false" class="nav-link">TJ-PR</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-19" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-RJ" aria-selected="false" class="nav-link">TJ-RJ</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-20" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-RN" aria-selected="false" class="nav-link">TJ-RN</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-21" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-RO" aria-selected="false" class="nav-link">TJ-RO</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-22" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-RR" aria-selected="false" class="nav-link">TJ-RR</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-23" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-RS" aria-selected="false" class="nav-link">TJ-RS</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-24" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-SC" aria-selected="false" class="nav-link">TJ-SC</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-25" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-SE" aria-selected="false" class="nav-link">TJ-SE</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-26" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-SP" aria-selected="false" class="nav-link">TJ-SP</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-33-27" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJ-TO" aria-selected="false" class="nav-link">TJ-TO</a></li></ul></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-33"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-1"><div class="card-body html-fill-item html-fill-container" data-title="TJ-AC">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-AC-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-2"><div class="card-body html-fill-item html-fill-container" data-title="TJ-AL">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-AL-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-3"><div class="card-body html-fill-item html-fill-container" data-title="TJ-AM">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-AM-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-4"><div class="card-body html-fill-item html-fill-container" data-title="TJ-AP">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-AP-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-5"><div class="card-body html-fill-item html-fill-container" data-title="TJ-BA">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-BA-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-6"><div class="card-body html-fill-item html-fill-container" data-title="TJ-CE">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-CE-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-7"><div class="card-body html-fill-item html-fill-container" data-title="TJ-DFT">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-DFT-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-8"><div class="card-body html-fill-item html-fill-container" data-title="TJ-ES">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-ES-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-9"><div class="card-body html-fill-item html-fill-container" data-title="TJ-GO">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-GO-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-10"><div class="card-body html-fill-item html-fill-container" data-title="TJ-MA">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-MA-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-11"><div class="card-body html-fill-item html-fill-container" data-title="TJ-MG">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-MG-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-12"><div class="card-body html-fill-item html-fill-container" data-title="TJ-MS">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-MS-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-13"><div class="card-body html-fill-item html-fill-container" data-title="TJ-MT">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-MT-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-14"><div class="card-body html-fill-item html-fill-container" data-title="TJ-PA">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-PA-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-15"><div class="card-body html-fill-item html-fill-container" data-title="TJ-PB">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-PB-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-16"><div class="card-body html-fill-item html-fill-container" data-title="TJ-PE">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-PE-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-17"><div class="card-body html-fill-item html-fill-container" data-title="TJ-PI">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-PI-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-18"><div class="card-body html-fill-item html-fill-container" data-title="TJ-PR">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-PR-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-19"><div class="card-body html-fill-item html-fill-container" data-title="TJ-RJ">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-RJ-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-20"><div class="card-body html-fill-item html-fill-container" data-title="TJ-RN">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-RN-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-21"><div class="card-body html-fill-item html-fill-container" data-title="TJ-RO">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-RO-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-22"><div class="card-body html-fill-item html-fill-container" data-title="TJ-RR">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-RR-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-23"><div class="card-body html-fill-item html-fill-container" data-title="TJ-RS">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-RS-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-24"><div class="card-body html-fill-item html-fill-container" data-title="TJ-SC">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-SC-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-25"><div class="card-body html-fill-item html-fill-container" data-title="TJ-SE">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-SE-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-26"><div class="card-body html-fill-item html-fill-container" data-title="TJ-SP">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-SP-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-33-27"><div class="card-body html-fill-item html-fill-container" data-title="TJ-TO">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaEstadualTJ-TO-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div></div><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-4"><div class="card-body html-fill-item html-fill-container" data-title="Justiça Federal">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-header bslib-navs-card-title"><div class="card-title"><span style="display: inline">
+
+</span></div><ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-61"><li class="nav-item" role="presentation"><a href="#card-tabset-61-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRF-1" aria-selected="true" class="nav-link active">TRF-1</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-61-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRF-2" aria-selected="false" class="nav-link">TRF-2</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-61-3" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRF-3" aria-selected="false" class="nav-link">TRF-3</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-61-4" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRF-4" aria-selected="false" class="nav-link">TRF-4</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-61-5" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRF-5" aria-selected="false" class="nav-link">TRF-5</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-61-6" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRF-6" aria-selected="false" class="nav-link">TRF-6</a></li></ul></div>
+
+
+
+
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-61"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-61-1"><div class="card-body html-fill-item html-fill-container" data-title="TRF-1">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaFederalTRF-1-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-61-2"><div class="card-body html-fill-item html-fill-container" data-title="TRF-2">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaFederalTRF-2-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-61-3"><div class="card-body html-fill-item html-fill-container" data-title="TRF-3">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaFederalTRF-3-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-61-4"><div class="card-body html-fill-item html-fill-container" data-title="TRF-4">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaFederalTRF-4-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-61-5"><div class="card-body html-fill-item html-fill-container" data-title="TRF-5">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaFederalTRF-5-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-61-6"><div class="card-body html-fill-item html-fill-container" data-title="TRF-6">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaFederalTRF-6-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div></div><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-5"><div class="card-body html-fill-item html-fill-container" data-title="Justiça Militar">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-header bslib-navs-card-title"><div class="card-title"><span style="display: inline">
+
+</span></div><ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-68"><li class="nav-item" role="presentation"><a href="#card-tabset-68-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJM-MG" aria-selected="true" class="nav-link active">TJM-MG</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-68-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJM-RS" aria-selected="false" class="nav-link">TJM-RS</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-68-3" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TJM-SP" aria-selected="false" class="nav-link">TJM-SP</a></li></ul></div>
+
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-68"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-68-1"><div class="card-body html-fill-item html-fill-container" data-title="TJM-MG">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaMilitarTJM-MG-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-68-2"><div class="card-body html-fill-item html-fill-container" data-title="TJM-RS">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaMilitarTJM-RS-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-68-3"><div class="card-body html-fill-item html-fill-container" data-title="TJM-SP">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaMilitarTJM-SP-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div></div><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-6"><div class="card-body html-fill-item html-fill-container" data-title="Justiça Superior">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-header bslib-navs-card-title"><div class="card-title"><span style="display: inline">
+
+</span></div><ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-72"><li class="nav-item" role="presentation"><a href="#card-tabset-72-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="STF" aria-selected="true" class="nav-link active">STF</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-72-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="STJ" aria-selected="false" class="nav-link">STJ</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-72-3" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="STM" aria-selected="false" class="nav-link">STM</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-72-4" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TSE" aria-selected="false" class="nav-link">TSE</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-72-5" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TST" aria-selected="false" class="nav-link">TST</a></li></ul></div>
+
+
+
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-72"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-72-1"><div class="card-body html-fill-item html-fill-container" data-title="STF">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaSuperiorSTF-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-72-2"><div class="card-body html-fill-item html-fill-container" data-title="STJ">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaSuperiorSTJ-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-72-3"><div class="card-body html-fill-item html-fill-container" data-title="STM">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaSuperiorSTM-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-72-4"><div class="card-body html-fill-item html-fill-container" data-title="TSE">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaSuperiorTSE-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-72-5"><div class="card-body html-fill-item html-fill-container" data-title="TST">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçaSuperiorTST-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div></div><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-7"><div class="card-body html-fill-item html-fill-container" data-title="Justiça do Trabalho">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-header bslib-navs-card-title"><div class="card-title"><span style="display: inline">
+
+</span></div><ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-78"><li class="nav-item" role="presentation"><a href="#card-tabset-78-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-1" aria-selected="true" class="nav-link active">TRT-1</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-10" aria-selected="false" class="nav-link">TRT-10</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-3" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-11" aria-selected="false" class="nav-link">TRT-11</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-4" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-12" aria-selected="false" class="nav-link">TRT-12</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-5" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-13" aria-selected="false" class="nav-link">TRT-13</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-6" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-14" aria-selected="false" class="nav-link">TRT-14</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-7" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-15" aria-selected="false" class="nav-link">TRT-15</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-8" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-16" aria-selected="false" class="nav-link">TRT-16</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-9" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-17" aria-selected="false" class="nav-link">TRT-17</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-10" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-18" aria-selected="false" class="nav-link">TRT-18</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-11" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-19" aria-selected="false" class="nav-link">TRT-19</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-12" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-2" aria-selected="false" class="nav-link">TRT-2</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-13" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-20" aria-selected="false" class="nav-link">TRT-20</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-14" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-21" aria-selected="false" class="nav-link">TRT-21</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-15" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-22" aria-selected="false" class="nav-link">TRT-22</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-16" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-23" aria-selected="false" class="nav-link">TRT-23</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-17" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-24" aria-selected="false" class="nav-link">TRT-24</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-18" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-3" aria-selected="false" class="nav-link">TRT-3</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-19" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-4" aria-selected="false" class="nav-link">TRT-4</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-20" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-5" aria-selected="false" class="nav-link">TRT-5</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-21" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-6" aria-selected="false" class="nav-link">TRT-6</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-22" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-7" aria-selected="false" class="nav-link">TRT-7</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-23" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-8" aria-selected="false" class="nav-link">TRT-8</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-78-24" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="TRT-9" aria-selected="false" class="nav-link">TRT-9</a></li></ul></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-78"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-1"><div class="card-body html-fill-item html-fill-container" data-title="TRT-1">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-1-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-2"><div class="card-body html-fill-item html-fill-container" data-title="TRT-10">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-10-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-3"><div class="card-body html-fill-item html-fill-container" data-title="TRT-11">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-11-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-4"><div class="card-body html-fill-item html-fill-container" data-title="TRT-12">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-12-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-5"><div class="card-body html-fill-item html-fill-container" data-title="TRT-13">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-13-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-6"><div class="card-body html-fill-item html-fill-container" data-title="TRT-14">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-14-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-7"><div class="card-body html-fill-item html-fill-container" data-title="TRT-15">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-15-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-8"><div class="card-body html-fill-item html-fill-container" data-title="TRT-16">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-16-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-9"><div class="card-body html-fill-item html-fill-container" data-title="TRT-17">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-17-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-10"><div class="card-body html-fill-item html-fill-container" data-title="TRT-18">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-18-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-11"><div class="card-body html-fill-item html-fill-container" data-title="TRT-19">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-19-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-12"><div class="card-body html-fill-item html-fill-container" data-title="TRT-2">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-2-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-13"><div class="card-body html-fill-item html-fill-container" data-title="TRT-20">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-20-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-14"><div class="card-body html-fill-item html-fill-container" data-title="TRT-21">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-21-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-15"><div class="card-body html-fill-item html-fill-container" data-title="TRT-22">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-22-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-16"><div class="card-body html-fill-item html-fill-container" data-title="TRT-23">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-23-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-17"><div class="card-body html-fill-item html-fill-container" data-title="TRT-24">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-24-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-18"><div class="card-body html-fill-item html-fill-container" data-title="TRT-3">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-3-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-19"><div class="card-body html-fill-item html-fill-container" data-title="TRT-4">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-4-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-20"><div class="card-body html-fill-item html-fill-container" data-title="TRT-5">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-5-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-21"><div class="card-body html-fill-item html-fill-container" data-title="TRT-6">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-6-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-22"><div class="card-body html-fill-item html-fill-container" data-title="TRT-7">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-7-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-23"><div class="card-body html-fill-item html-fill-container" data-title="TRT-8">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-8-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-78-24"><div class="card-body html-fill-item html-fill-container" data-title="TRT-9">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/JustiçadoTrabalhoTRT-9-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div></div><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-1-8"><div class="card-body html-fill-item html-fill-container" data-title="Ministérios Públicos">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-header bslib-navs-card-title"><div class="card-title"><span style="display: inline">
+
+</span></div><ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-103"><li class="nav-item" role="presentation"><a href="#card-tabset-103-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-AC" aria-selected="true" class="nav-link active">MP-AC</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-AL" aria-selected="false" class="nav-link">MP-AL</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-3" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-AM" aria-selected="false" class="nav-link">MP-AM</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-4" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-AP" aria-selected="false" class="nav-link">MP-AP</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-5" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-BA" aria-selected="false" class="nav-link">MP-BA</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-6" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-CE" aria-selected="false" class="nav-link">MP-CE</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-7" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-DFT" aria-selected="false" class="nav-link">MP-DFT</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-8" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-ES" aria-selected="false" class="nav-link">MP-ES</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-9" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MPF" aria-selected="false" class="nav-link">MPF</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-10" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-GO" aria-selected="false" class="nav-link">MP-GO</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-11" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MPM" aria-selected="false" class="nav-link">MPM</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-12" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-MA" aria-selected="false" class="nav-link">MP-MA</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-13" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-MG" aria-selected="false" class="nav-link">MP-MG</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-14" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-MS" aria-selected="false" class="nav-link">MP-MS</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-15" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-MT" aria-selected="false" class="nav-link">MP-MT</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-16" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-PA" aria-selected="false" class="nav-link">MP-PA</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-17" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-PB" aria-selected="false" class="nav-link">MP-PB</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-18" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-PE" aria-selected="false" class="nav-link">MP-PE</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-19" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-PI" aria-selected="false" class="nav-link">MP-PI</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-20" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-PR" aria-selected="false" class="nav-link">MP-PR</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-21" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-RJ" aria-selected="false" class="nav-link">MP-RJ</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-22" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-RN" aria-selected="false" class="nav-link">MP-RN</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-23" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-RO" aria-selected="false" class="nav-link">MP-RO</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-24" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-RR" aria-selected="false" class="nav-link">MP-RR</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-25" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-RS" aria-selected="false" class="nav-link">MP-RS</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-26" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-SC" aria-selected="false" class="nav-link">MP-SC</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-27" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-SE" aria-selected="false" class="nav-link">MP-SE</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-28" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-SP" aria-selected="false" class="nav-link">MP-SP</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-29" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MPT" aria-selected="false" class="nav-link">MPT</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-103-30" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="MP-TO" aria-selected="false" class="nav-link">MP-TO</a></li></ul></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-103"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-1"><div class="card-body html-fill-item html-fill-container" data-title="MP-AC">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-AC-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-2"><div class="card-body html-fill-item html-fill-container" data-title="MP-AL">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-AL-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-3"><div class="card-body html-fill-item html-fill-container" data-title="MP-AM">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-AM-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-4"><div class="card-body html-fill-item html-fill-container" data-title="MP-AP">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-AP-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-5"><div class="card-body html-fill-item html-fill-container" data-title="MP-BA">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-BA-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-6"><div class="card-body html-fill-item html-fill-container" data-title="MP-CE">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-CE-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-7"><div class="card-body html-fill-item html-fill-container" data-title="MP-DFT">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-DFT-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-8"><div class="card-body html-fill-item html-fill-container" data-title="MP-ES">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-ES-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-9"><div class="card-body html-fill-item html-fill-container" data-title="MPF">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMPF-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-10"><div class="card-body html-fill-item html-fill-container" data-title="MP-GO">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-GO-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-11"><div class="card-body html-fill-item html-fill-container" data-title="MPM">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMPM-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-12"><div class="card-body html-fill-item html-fill-container" data-title="MP-MA">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-MA-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-13"><div class="card-body html-fill-item html-fill-container" data-title="MP-MG">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-MG-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-14"><div class="card-body html-fill-item html-fill-container" data-title="MP-MS">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-MS-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-15"><div class="card-body html-fill-item html-fill-container" data-title="MP-MT">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-MT-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-16"><div class="card-body html-fill-item html-fill-container" data-title="MP-PA">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-PA-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-17"><div class="card-body html-fill-item html-fill-container" data-title="MP-PB">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-PB-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-18"><div class="card-body html-fill-item html-fill-container" data-title="MP-PE">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-PE-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-19"><div class="card-body html-fill-item html-fill-container" data-title="MP-PI">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-PI-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-20"><div class="card-body html-fill-item html-fill-container" data-title="MP-PR">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-PR-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-21"><div class="card-body html-fill-item html-fill-container" data-title="MP-RJ">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-RJ-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-22"><div class="card-body html-fill-item html-fill-container" data-title="MP-RN">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-RN-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-23"><div class="card-body html-fill-item html-fill-container" data-title="MP-RO">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-RO-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-24"><div class="card-body html-fill-item html-fill-container" data-title="MP-RR">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-RR-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-25"><div class="card-body html-fill-item html-fill-container" data-title="MP-RS">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-RS-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-26"><div class="card-body html-fill-item html-fill-container" data-title="MP-SC">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-SC-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-27"><div class="card-body html-fill-item html-fill-container" data-title="MP-SE">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-SE-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-28"><div class="card-body html-fill-item html-fill-container" data-title="MP-SP">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-SP-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-29"><div class="card-body html-fill-item html-fill-container" data-title="MPT">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMPT-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-103-30"><div class="card-body html-fill-item html-fill-container" data-title="MP-TO">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="02-dashboard_files/figure-html/MinistériosPúblicosMP-TO-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden html-fill-item html-fill-container">
+
+</div>
+</div>
+</div></div></div><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div></div><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /container fluid -->
+
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
+
+
+
+</body></html>

@@ -1,0 +1,1155 @@
+### Conselhos de Justiça
+
+#### Row {.tabset}
+
+##### CJF
+
+```{r}
+#| label: ConselhosdeJustiçaCJF
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "CJF")
+```
+
+##### CNJ
+
+```{r}
+#| label: ConselhosdeJustiçaCNJ
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "CNJ")
+```
+
+
+### Justiça Eleitoral
+
+#### Row {.tabset}
+
+##### TRE-AC
+
+```{r}
+#| label: JustiçaEleitoralTRE-AC
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-AC")
+```
+
+##### TRE-AL
+
+```{r}
+#| label: JustiçaEleitoralTRE-AL
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-AL")
+```
+
+##### TRE-AM
+
+```{r}
+#| label: JustiçaEleitoralTRE-AM
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-AM")
+```
+
+##### TRE-AP
+
+```{r}
+#| label: JustiçaEleitoralTRE-AP
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-AP")
+```
+
+##### TRE-BA
+
+```{r}
+#| label: JustiçaEleitoralTRE-BA
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-BA")
+```
+
+##### TRE-CE
+
+```{r}
+#| label: JustiçaEleitoralTRE-CE
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-CE")
+```
+
+##### TRE-DF
+
+```{r}
+#| label: JustiçaEleitoralTRE-DF
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-DF")
+```
+
+##### TRE-ES
+
+```{r}
+#| label: JustiçaEleitoralTRE-ES
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-ES")
+```
+
+##### TRE-GO
+
+```{r}
+#| label: JustiçaEleitoralTRE-GO
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-GO")
+```
+
+##### TRE-MA
+
+```{r}
+#| label: JustiçaEleitoralTRE-MA
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-MA")
+```
+
+##### TRE-MG
+
+```{r}
+#| label: JustiçaEleitoralTRE-MG
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-MG")
+```
+
+##### TRE-MS
+
+```{r}
+#| label: JustiçaEleitoralTRE-MS
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-MS")
+```
+
+##### TRE-MT
+
+```{r}
+#| label: JustiçaEleitoralTRE-MT
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-MT")
+```
+
+##### TRE-PA
+
+```{r}
+#| label: JustiçaEleitoralTRE-PA
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-PA")
+```
+
+##### TRE-PB
+
+```{r}
+#| label: JustiçaEleitoralTRE-PB
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-PB")
+```
+
+##### TRE-PE
+
+```{r}
+#| label: JustiçaEleitoralTRE-PE
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-PE")
+```
+
+##### TRE-PI
+
+```{r}
+#| label: JustiçaEleitoralTRE-PI
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-PI")
+```
+
+##### TRE-PR
+
+```{r}
+#| label: JustiçaEleitoralTRE-PR
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-PR")
+```
+
+##### TRE-RJ
+
+```{r}
+#| label: JustiçaEleitoralTRE-RJ
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-RJ")
+```
+
+##### TRE-RN
+
+```{r}
+#| label: JustiçaEleitoralTRE-RN
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-RN")
+```
+
+##### TRE-RO
+
+```{r}
+#| label: JustiçaEleitoralTRE-RO
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-RO")
+```
+
+##### TRE-RR
+
+```{r}
+#| label: JustiçaEleitoralTRE-RR
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-RR")
+```
+
+##### TRE-RS
+
+```{r}
+#| label: JustiçaEleitoralTRE-RS
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-RS")
+```
+
+##### TRE-SC
+
+```{r}
+#| label: JustiçaEleitoralTRE-SC
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-SC")
+```
+
+##### TRE-SE
+
+```{r}
+#| label: JustiçaEleitoralTRE-SE
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-SE")
+```
+
+##### TRE-SP
+
+```{r}
+#| label: JustiçaEleitoralTRE-SP
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-SP")
+```
+
+##### TRE-TO
+
+```{r}
+#| label: JustiçaEleitoralTRE-TO
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRE-TO")
+```
+
+
+### Justiça Estadual
+
+#### Row {.tabset}
+
+##### TJ-AC
+
+```{r}
+#| label: JustiçaEstadualTJ-AC
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-AC")
+```
+
+##### TJ-AL
+
+```{r}
+#| label: JustiçaEstadualTJ-AL
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-AL")
+```
+
+##### TJ-AM
+
+```{r}
+#| label: JustiçaEstadualTJ-AM
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-AM")
+```
+
+##### TJ-AP
+
+```{r}
+#| label: JustiçaEstadualTJ-AP
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-AP")
+```
+
+##### TJ-BA
+
+```{r}
+#| label: JustiçaEstadualTJ-BA
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-BA")
+```
+
+##### TJ-CE
+
+```{r}
+#| label: JustiçaEstadualTJ-CE
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-CE")
+```
+
+##### TJ-DFT
+
+```{r}
+#| label: JustiçaEstadualTJ-DFT
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-DFT")
+```
+
+##### TJ-ES
+
+```{r}
+#| label: JustiçaEstadualTJ-ES
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-ES")
+```
+
+##### TJ-GO
+
+```{r}
+#| label: JustiçaEstadualTJ-GO
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-GO")
+```
+
+##### TJ-MA
+
+```{r}
+#| label: JustiçaEstadualTJ-MA
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-MA")
+```
+
+##### TJ-MG
+
+```{r}
+#| label: JustiçaEstadualTJ-MG
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-MG")
+```
+
+##### TJ-MS
+
+```{r}
+#| label: JustiçaEstadualTJ-MS
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-MS")
+```
+
+##### TJ-MT
+
+```{r}
+#| label: JustiçaEstadualTJ-MT
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-MT")
+```
+
+##### TJ-PA
+
+```{r}
+#| label: JustiçaEstadualTJ-PA
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-PA")
+```
+
+##### TJ-PB
+
+```{r}
+#| label: JustiçaEstadualTJ-PB
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-PB")
+```
+
+##### TJ-PE
+
+```{r}
+#| label: JustiçaEstadualTJ-PE
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-PE")
+```
+
+##### TJ-PI
+
+```{r}
+#| label: JustiçaEstadualTJ-PI
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-PI")
+```
+
+##### TJ-PR
+
+```{r}
+#| label: JustiçaEstadualTJ-PR
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-PR")
+```
+
+##### TJ-RJ
+
+```{r}
+#| label: JustiçaEstadualTJ-RJ
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-RJ")
+```
+
+##### TJ-RN
+
+```{r}
+#| label: JustiçaEstadualTJ-RN
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-RN")
+```
+
+##### TJ-RO
+
+```{r}
+#| label: JustiçaEstadualTJ-RO
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-RO")
+```
+
+##### TJ-RR
+
+```{r}
+#| label: JustiçaEstadualTJ-RR
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-RR")
+```
+
+##### TJ-RS
+
+```{r}
+#| label: JustiçaEstadualTJ-RS
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-RS")
+```
+
+##### TJ-SC
+
+```{r}
+#| label: JustiçaEstadualTJ-SC
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-SC")
+```
+
+##### TJ-SE
+
+```{r}
+#| label: JustiçaEstadualTJ-SE
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-SE")
+```
+
+##### TJ-SP
+
+```{r}
+#| label: JustiçaEstadualTJ-SP
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-SP")
+```
+
+##### TJ-TO
+
+```{r}
+#| label: JustiçaEstadualTJ-TO
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJ-TO")
+```
+
+
+### Justiça Federal
+
+#### Row {.tabset}
+
+##### TRF-1
+
+```{r}
+#| label: JustiçaFederalTRF-1
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRF-1")
+```
+
+##### TRF-2
+
+```{r}
+#| label: JustiçaFederalTRF-2
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRF-2")
+```
+
+##### TRF-3
+
+```{r}
+#| label: JustiçaFederalTRF-3
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRF-3")
+```
+
+##### TRF-4
+
+```{r}
+#| label: JustiçaFederalTRF-4
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRF-4")
+```
+
+##### TRF-5
+
+```{r}
+#| label: JustiçaFederalTRF-5
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRF-5")
+```
+
+##### TRF-6
+
+```{r}
+#| label: JustiçaFederalTRF-6
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRF-6")
+```
+
+
+### Justiça Militar
+
+#### Row {.tabset}
+
+##### TJM-MG
+
+```{r}
+#| label: JustiçaMilitarTJM-MG
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJM-MG")
+```
+
+##### TJM-RS
+
+```{r}
+#| label: JustiçaMilitarTJM-RS
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJM-RS")
+```
+
+##### TJM-SP
+
+```{r}
+#| label: JustiçaMilitarTJM-SP
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TJM-SP")
+```
+
+
+### Justiça Superior
+
+#### Row {.tabset}
+
+##### STF
+
+```{r}
+#| label: JustiçaSuperiorSTF
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "STF")
+```
+
+##### STJ
+
+```{r}
+#| label: JustiçaSuperiorSTJ
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "STJ")
+```
+
+##### STM
+
+```{r}
+#| label: JustiçaSuperiorSTM
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "STM")
+```
+
+##### TSE
+
+```{r}
+#| label: JustiçaSuperiorTSE
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TSE")
+```
+
+##### TST
+
+```{r}
+#| label: JustiçaSuperiorTST
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TST")
+```
+
+
+### Justiça do Trabalho
+
+#### Row {.tabset}
+
+##### TRT-1
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-1
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-1")
+```
+
+##### TRT-10
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-10
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-10")
+```
+
+##### TRT-11
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-11
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-11")
+```
+
+##### TRT-12
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-12
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-12")
+```
+
+##### TRT-13
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-13
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-13")
+```
+
+##### TRT-14
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-14
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-14")
+```
+
+##### TRT-15
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-15
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-15")
+```
+
+##### TRT-16
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-16
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-16")
+```
+
+##### TRT-17
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-17
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-17")
+```
+
+##### TRT-18
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-18
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-18")
+```
+
+##### TRT-19
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-19
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-19")
+```
+
+##### TRT-2
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-2
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-2")
+```
+
+##### TRT-20
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-20
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-20")
+```
+
+##### TRT-21
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-21
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-21")
+```
+
+##### TRT-22
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-22
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-22")
+```
+
+##### TRT-23
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-23
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-23")
+```
+
+##### TRT-24
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-24
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-24")
+```
+
+##### TRT-3
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-3
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-3")
+```
+
+##### TRT-4
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-4
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-4")
+```
+
+##### TRT-5
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-5
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-5")
+```
+
+##### TRT-6
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-6
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-6")
+```
+
+##### TRT-7
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-7
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-7")
+```
+
+##### TRT-8
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-8
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-8")
+```
+
+##### TRT-9
+
+```{r}
+#| label: JustiçadoTrabalhoTRT-9
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "TRT-9")
+```
+
+
+### Ministérios Públicos
+
+#### Row {.tabset}
+
+##### MP-AC
+
+```{r}
+#| label: MinistériosPúblicosMP-AC
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-AC")
+```
+
+##### MP-AL
+
+```{r}
+#| label: MinistériosPúblicosMP-AL
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-AL")
+```
+
+##### MP-AM
+
+```{r}
+#| label: MinistériosPúblicosMP-AM
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-AM")
+```
+
+##### MP-AP
+
+```{r}
+#| label: MinistériosPúblicosMP-AP
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-AP")
+```
+
+##### MP-BA
+
+```{r}
+#| label: MinistériosPúblicosMP-BA
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-BA")
+```
+
+##### MP-CE
+
+```{r}
+#| label: MinistériosPúblicosMP-CE
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-CE")
+```
+
+##### MP-DFT
+
+```{r}
+#| label: MinistériosPúblicosMP-DFT
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-DFT")
+```
+
+##### MP-ES
+
+```{r}
+#| label: MinistériosPúblicosMP-ES
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-ES")
+```
+
+##### MPF
+
+```{r}
+#| label: MinistériosPúblicosMPF
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MPF")
+```
+
+##### MP-GO
+
+```{r}
+#| label: MinistériosPúblicosMP-GO
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-GO")
+```
+
+##### MPM
+
+```{r}
+#| label: MinistériosPúblicosMPM
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MPM")
+```
+
+##### MP-MA
+
+```{r}
+#| label: MinistériosPúblicosMP-MA
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-MA")
+```
+
+##### MP-MG
+
+```{r}
+#| label: MinistériosPúblicosMP-MG
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-MG")
+```
+
+##### MP-MS
+
+```{r}
+#| label: MinistériosPúblicosMP-MS
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-MS")
+```
+
+##### MP-MT
+
+```{r}
+#| label: MinistériosPúblicosMP-MT
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-MT")
+```
+
+##### MP-PA
+
+```{r}
+#| label: MinistériosPúblicosMP-PA
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-PA")
+```
+
+##### MP-PB
+
+```{r}
+#| label: MinistériosPúblicosMP-PB
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-PB")
+```
+
+##### MP-PE
+
+```{r}
+#| label: MinistériosPúblicosMP-PE
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-PE")
+```
+
+##### MP-PI
+
+```{r}
+#| label: MinistériosPúblicosMP-PI
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-PI")
+```
+
+##### MP-PR
+
+```{r}
+#| label: MinistériosPúblicosMP-PR
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-PR")
+```
+
+##### MP-RJ
+
+```{r}
+#| label: MinistériosPúblicosMP-RJ
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-RJ")
+```
+
+##### MP-RN
+
+```{r}
+#| label: MinistériosPúblicosMP-RN
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-RN")
+```
+
+##### MP-RO
+
+```{r}
+#| label: MinistériosPúblicosMP-RO
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-RO")
+```
+
+##### MP-RR
+
+```{r}
+#| label: MinistériosPúblicosMP-RR
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-RR")
+```
+
+##### MP-RS
+
+```{r}
+#| label: MinistériosPúblicosMP-RS
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-RS")
+```
+
+##### MP-SC
+
+```{r}
+#| label: MinistériosPúblicosMP-SC
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-SC")
+```
+
+##### MP-SE
+
+```{r}
+#| label: MinistériosPúblicosMP-SE
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-SE")
+```
+
+##### MP-SP
+
+```{r}
+#| label: MinistériosPúblicosMP-SP
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-SP")
+```
+
+##### MPT
+
+```{r}
+#| label: MinistériosPúblicosMPT
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MPT")
+```
+
+##### MP-TO
+
+```{r}
+#| label: MinistériosPúblicosMP-TO
+#| fig-width: 25
+#| fig-height: 10
+plot_tendencias(remuneracao_base, "MP-TO")
+```
+
