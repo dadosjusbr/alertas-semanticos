@@ -29,11 +29,16 @@ qry <- read_sql_query(query_file)
 remuneracao_base <- get_query(qry, conectar = TRUE)
 remuneracao_base <- remuneracao_base %>% mutate(ano_mes = ym(sprintf("%d/%02d", ano, mes)))
 
-orgaos <- get_query("select id as id_orgao, entidade, jurisdicao from orgaos")
+orgaos <- get_query("select id as id_orgao, entidade, jurisdicao,
+                    case when coletando::text = 'null' then 'coleta automática'
+                    when coletando->0->>'collecting' = 'true' then 'coleta manual'
+                    when coletando->0->>'collecting' = 'false' then 'órgão não monitorado' end as status_coleta
+                    from orgaos")
 
 orgaos <- orgaos %>%
   transmute(
     id_orgao = id_orgao,
+    status_coleta = status_coleta,
     grupo = case_when(
       entidade == "Tribunal" & jurisdicao == "Estadual" ~ "Justiça Estadual",
       entidade == "Tribunal" & jurisdicao == "Eleitoral" ~ "Justiça Eleitoral",
