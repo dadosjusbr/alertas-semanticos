@@ -17,6 +17,7 @@ format:
 library(tidyverse)
 library(here)
 library(zoo)
+library(patchwork)
 
 source(here("setup/rsetup.R"))
 
@@ -131,10 +132,11 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
             "Valores normais" = "transparent"
         )
 
-        dados %>%
+        plot_mes <- dados %>%
             pivot_longer(-c(id_orgao:ano), names_to = "metrica", values_to = "valor") %>%
             bind_rows(status) %>%
             arrange(ano, mes, metrica) %>%
+            filter(metrica != "media_movel_3_anos") %>%
             ggplot(aes(x = ano_mes)) +
             geom_col(
                 data = ~ filter(., metrica == "valor"),
@@ -142,7 +144,7 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
                 alpha = .6
             ) +
             geom_line(
-                data = ~ filter(., metrica %in% c("media_movel_3_meses", "media_movel_3_anos")),
+                data = ~ filter(., metrica == "media_movel_3_meses"),
                 linewidth = 1,
                 aes(y = valor, color = metrica)
             ) +
@@ -150,6 +152,50 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
                 size = 15,
                 shape = "-",
                 data = ~ filter(., metrica == "media_movel_3_meses"),
+                aes(y = valor, color = metrica)
+            ) +
+            geom_point(
+                data = ~ filter(., !metrica %in% c("media_movel_3_meses", "media_movel_3_anos", "valor")),
+                size = 5,
+                aes(y = valor, color = metrica)
+            ) +
+            scale_color_manual(values = plt, labels = lbls) +
+            scale_fill_manual(values = plt, labels = lbls) +
+            facet_wrap(~ano, scales = "free_x", nrow = 1) +
+            scale_x_date(
+                breaks = scales::breaks_pretty(4),
+                labels = scales::label_date_short(sep = "<br>"),
+                expand = c(0, 0)
+            ) +
+            scale_y_continuous(
+                labels = ~ numero(. / 1e6),
+                expand = c(0.01, 0),
+                limits = c(0, y_lim)
+            ) +
+            labs(
+                title = sprintf("%s | %s", orgao, grp),
+                subtitle = "Média móvel de 3 meses",
+                x = "ano e mês",
+                y = "Remuneração base total (R$ milhões)",
+                fill = "",
+                color = ""
+            ) +
+            theme(legend.position = "none")
+
+        plot_ano <- dados %>%
+            pivot_longer(-c(id_orgao:ano), names_to = "metrica", values_to = "valor") %>%
+            bind_rows(status) %>%
+            arrange(ano, mes, metrica) %>%
+            filter(metrica != "media_movel_3_meses") %>%
+            ggplot(aes(x = ano_mes)) +
+            geom_col(
+                data = ~ filter(., metrica == "valor"),
+                aes(y = valor, fill = metrica),
+                alpha = .6
+            ) +
+            geom_line(
+                data = ~ filter(., metrica == "media_movel_3_anos"),
+                linewidth = 1,
                 aes(y = valor, color = metrica)
             ) +
             geom_point(
@@ -168,7 +214,6 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
             facet_wrap(~ano, scales = "free_x", nrow = 1) +
             scale_x_date(
                 breaks = scales::breaks_pretty(4),
-                # breaks = scales::breaks_pretty((2025 - 2018) * 6),
                 labels = scales::label_date_short(sep = "<br>"),
                 expand = c(0, 0)
             ) +
@@ -178,29 +223,30 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
                 limits = c(0, y_lim)
             ) +
             labs(
-                title = sprintf("%s | %s", orgao, grp),
+                subtitle = "Média móvel de 3 anos",
                 x = "ano e mês",
                 y = "Remuneração base total (R$ milhões)",
                 fill = "",
                 color = ""
             ) +
+            theme(legend.position = "none")
+
+        plot_final <- plot_mes / plot_ano +
+            plot_layout(guides = "auto") &
             theme(
-                panel.grid.major.y = element_line(),
-                panel.grid.major.x = element_blank(),
-                panel.grid.minor.x = element_blank(),
                 legend.position = "top",
+                legend.direction = "horizontal",
                 legend.justification = "left",
-                legend.direction = "vertical",
                 legend.location = "plot",
                 legend.box.just = "left",
-                panel.spacing = unit(2, "mm"),
-                legend.box = "vertical",
-                strip.text.x.top = element_blank()
-            ) +
+                panel.spacing = unit(2, "mm")
+            ) &
             guides(
-                fill = guide_legend(order = 1),
-                color = guide_legend(nrow = 4, order = 2)
+                color = guide_legend(nrow = 1),
+                fill = guide_legend(nrow = 1)
             )
+
+        plot_final
     }
 }
 ```
@@ -224,7 +270,7 @@ texto <- remuneracao_base %>%
             "\n```{{r, , results='asis'}}\n",
             "#| label: {chunk_label}\n",
             "#| fig-width: 25\n",
-            "#| fig-height: 10\n",
+            "#| fig-height: 15\n",
             "plot_tendencias(remuneracao_base, \"{lbl_orgao}\")\n",
             "```"
         )
@@ -253,7 +299,7 @@ texto %>%
 ```{r, , results='asis'}
 #| label: ConselhosdeJustiçaCJF
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "CJF")
 ```
 
@@ -262,7 +308,7 @@ plot_tendencias(remuneracao_base, "CJF")
 ```{r, , results='asis'}
 #| label: ConselhosdeJustiçaCNJ
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "CNJ")
 ```
 
@@ -276,7 +322,7 @@ plot_tendencias(remuneracao_base, "CNJ")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-AC
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-AC")
 ```
 
@@ -285,7 +331,7 @@ plot_tendencias(remuneracao_base, "TRE-AC")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-AL
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-AL")
 ```
 
@@ -294,7 +340,7 @@ plot_tendencias(remuneracao_base, "TRE-AL")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-AM
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-AM")
 ```
 
@@ -303,7 +349,7 @@ plot_tendencias(remuneracao_base, "TRE-AM")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-AP
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-AP")
 ```
 
@@ -312,7 +358,7 @@ plot_tendencias(remuneracao_base, "TRE-AP")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-BA
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-BA")
 ```
 
@@ -321,7 +367,7 @@ plot_tendencias(remuneracao_base, "TRE-BA")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-CE
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-CE")
 ```
 
@@ -330,7 +376,7 @@ plot_tendencias(remuneracao_base, "TRE-CE")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-DF
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-DF")
 ```
 
@@ -339,7 +385,7 @@ plot_tendencias(remuneracao_base, "TRE-DF")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-ES
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-ES")
 ```
 
@@ -348,7 +394,7 @@ plot_tendencias(remuneracao_base, "TRE-ES")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-GO
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-GO")
 ```
 
@@ -357,7 +403,7 @@ plot_tendencias(remuneracao_base, "TRE-GO")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-MA
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-MA")
 ```
 
@@ -366,7 +412,7 @@ plot_tendencias(remuneracao_base, "TRE-MA")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-MG
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-MG")
 ```
 
@@ -375,7 +421,7 @@ plot_tendencias(remuneracao_base, "TRE-MG")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-MS
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-MS")
 ```
 
@@ -384,7 +430,7 @@ plot_tendencias(remuneracao_base, "TRE-MS")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-MT
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-MT")
 ```
 
@@ -393,7 +439,7 @@ plot_tendencias(remuneracao_base, "TRE-MT")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-PA
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-PA")
 ```
 
@@ -402,7 +448,7 @@ plot_tendencias(remuneracao_base, "TRE-PA")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-PB
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-PB")
 ```
 
@@ -411,7 +457,7 @@ plot_tendencias(remuneracao_base, "TRE-PB")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-PE
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-PE")
 ```
 
@@ -420,7 +466,7 @@ plot_tendencias(remuneracao_base, "TRE-PE")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-PI
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-PI")
 ```
 
@@ -429,7 +475,7 @@ plot_tendencias(remuneracao_base, "TRE-PI")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-PR
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-PR")
 ```
 
@@ -438,7 +484,7 @@ plot_tendencias(remuneracao_base, "TRE-PR")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-RJ
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-RJ")
 ```
 
@@ -447,7 +493,7 @@ plot_tendencias(remuneracao_base, "TRE-RJ")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-RN
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-RN")
 ```
 
@@ -456,7 +502,7 @@ plot_tendencias(remuneracao_base, "TRE-RN")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-RO
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-RO")
 ```
 
@@ -465,7 +511,7 @@ plot_tendencias(remuneracao_base, "TRE-RO")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-RR
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-RR")
 ```
 
@@ -474,7 +520,7 @@ plot_tendencias(remuneracao_base, "TRE-RR")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-RS
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-RS")
 ```
 
@@ -483,7 +529,7 @@ plot_tendencias(remuneracao_base, "TRE-RS")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-SC
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-SC")
 ```
 
@@ -492,7 +538,7 @@ plot_tendencias(remuneracao_base, "TRE-SC")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-SE
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-SE")
 ```
 
@@ -501,7 +547,7 @@ plot_tendencias(remuneracao_base, "TRE-SE")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-SP
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-SP")
 ```
 
@@ -510,7 +556,7 @@ plot_tendencias(remuneracao_base, "TRE-SP")
 ```{r, , results='asis'}
 #| label: JustiçaEleitoralTRE-TO
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRE-TO")
 ```
 
@@ -524,7 +570,7 @@ plot_tendencias(remuneracao_base, "TRE-TO")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-AC
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-AC")
 ```
 
@@ -533,7 +579,7 @@ plot_tendencias(remuneracao_base, "TJ-AC")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-AL
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-AL")
 ```
 
@@ -542,7 +588,7 @@ plot_tendencias(remuneracao_base, "TJ-AL")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-AM
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-AM")
 ```
 
@@ -551,7 +597,7 @@ plot_tendencias(remuneracao_base, "TJ-AM")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-AP
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-AP")
 ```
 
@@ -560,7 +606,7 @@ plot_tendencias(remuneracao_base, "TJ-AP")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-BA
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-BA")
 ```
 
@@ -569,7 +615,7 @@ plot_tendencias(remuneracao_base, "TJ-BA")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-CE
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-CE")
 ```
 
@@ -578,7 +624,7 @@ plot_tendencias(remuneracao_base, "TJ-CE")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-DFT
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-DFT")
 ```
 
@@ -587,7 +633,7 @@ plot_tendencias(remuneracao_base, "TJ-DFT")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-ES
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-ES")
 ```
 
@@ -596,7 +642,7 @@ plot_tendencias(remuneracao_base, "TJ-ES")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-GO
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-GO")
 ```
 
@@ -605,7 +651,7 @@ plot_tendencias(remuneracao_base, "TJ-GO")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-MA
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-MA")
 ```
 
@@ -614,7 +660,7 @@ plot_tendencias(remuneracao_base, "TJ-MA")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-MG
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-MG")
 ```
 
@@ -623,7 +669,7 @@ plot_tendencias(remuneracao_base, "TJ-MG")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-MS
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-MS")
 ```
 
@@ -632,7 +678,7 @@ plot_tendencias(remuneracao_base, "TJ-MS")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-MT
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-MT")
 ```
 
@@ -641,7 +687,7 @@ plot_tendencias(remuneracao_base, "TJ-MT")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-PA
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-PA")
 ```
 
@@ -650,7 +696,7 @@ plot_tendencias(remuneracao_base, "TJ-PA")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-PB
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-PB")
 ```
 
@@ -659,7 +705,7 @@ plot_tendencias(remuneracao_base, "TJ-PB")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-PE
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-PE")
 ```
 
@@ -668,7 +714,7 @@ plot_tendencias(remuneracao_base, "TJ-PE")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-PI
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-PI")
 ```
 
@@ -677,7 +723,7 @@ plot_tendencias(remuneracao_base, "TJ-PI")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-PR
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-PR")
 ```
 
@@ -686,7 +732,7 @@ plot_tendencias(remuneracao_base, "TJ-PR")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-RJ
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-RJ")
 ```
 
@@ -695,7 +741,7 @@ plot_tendencias(remuneracao_base, "TJ-RJ")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-RN
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-RN")
 ```
 
@@ -704,7 +750,7 @@ plot_tendencias(remuneracao_base, "TJ-RN")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-RO
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-RO")
 ```
 
@@ -713,7 +759,7 @@ plot_tendencias(remuneracao_base, "TJ-RO")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-RR
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-RR")
 ```
 
@@ -722,7 +768,7 @@ plot_tendencias(remuneracao_base, "TJ-RR")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-RS
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-RS")
 ```
 
@@ -731,7 +777,7 @@ plot_tendencias(remuneracao_base, "TJ-RS")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-SC
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-SC")
 ```
 
@@ -740,7 +786,7 @@ plot_tendencias(remuneracao_base, "TJ-SC")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-SE
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-SE")
 ```
 
@@ -749,7 +795,7 @@ plot_tendencias(remuneracao_base, "TJ-SE")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-SP
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-SP")
 ```
 
@@ -758,7 +804,7 @@ plot_tendencias(remuneracao_base, "TJ-SP")
 ```{r, , results='asis'}
 #| label: JustiçaEstadualTJ-TO
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJ-TO")
 ```
 
@@ -772,7 +818,7 @@ plot_tendencias(remuneracao_base, "TJ-TO")
 ```{r, , results='asis'}
 #| label: JustiçaFederalTRF-1
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRF-1")
 ```
 
@@ -781,7 +827,7 @@ plot_tendencias(remuneracao_base, "TRF-1")
 ```{r, , results='asis'}
 #| label: JustiçaFederalTRF-2
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRF-2")
 ```
 
@@ -790,7 +836,7 @@ plot_tendencias(remuneracao_base, "TRF-2")
 ```{r, , results='asis'}
 #| label: JustiçaFederalTRF-3
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRF-3")
 ```
 
@@ -799,7 +845,7 @@ plot_tendencias(remuneracao_base, "TRF-3")
 ```{r, , results='asis'}
 #| label: JustiçaFederalTRF-4
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRF-4")
 ```
 
@@ -808,7 +854,7 @@ plot_tendencias(remuneracao_base, "TRF-4")
 ```{r, , results='asis'}
 #| label: JustiçaFederalTRF-5
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRF-5")
 ```
 
@@ -817,7 +863,7 @@ plot_tendencias(remuneracao_base, "TRF-5")
 ```{r, , results='asis'}
 #| label: JustiçaFederalTRF-6
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRF-6")
 ```
 
@@ -831,7 +877,7 @@ plot_tendencias(remuneracao_base, "TRF-6")
 ```{r, , results='asis'}
 #| label: JustiçaMilitarTJM-MG
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJM-MG")
 ```
 
@@ -840,7 +886,7 @@ plot_tendencias(remuneracao_base, "TJM-MG")
 ```{r, , results='asis'}
 #| label: JustiçaMilitarTJM-RS
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJM-RS")
 ```
 
@@ -849,7 +895,7 @@ plot_tendencias(remuneracao_base, "TJM-RS")
 ```{r, , results='asis'}
 #| label: JustiçaMilitarTJM-SP
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TJM-SP")
 ```
 
@@ -863,7 +909,7 @@ plot_tendencias(remuneracao_base, "TJM-SP")
 ```{r, , results='asis'}
 #| label: JustiçaSuperiorSTF
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "STF")
 ```
 
@@ -872,7 +918,7 @@ plot_tendencias(remuneracao_base, "STF")
 ```{r, , results='asis'}
 #| label: JustiçaSuperiorSTJ
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "STJ")
 ```
 
@@ -881,7 +927,7 @@ plot_tendencias(remuneracao_base, "STJ")
 ```{r, , results='asis'}
 #| label: JustiçaSuperiorSTM
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "STM")
 ```
 
@@ -890,7 +936,7 @@ plot_tendencias(remuneracao_base, "STM")
 ```{r, , results='asis'}
 #| label: JustiçaSuperiorTSE
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TSE")
 ```
 
@@ -899,7 +945,7 @@ plot_tendencias(remuneracao_base, "TSE")
 ```{r, , results='asis'}
 #| label: JustiçaSuperiorTST
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TST")
 ```
 
@@ -913,7 +959,7 @@ plot_tendencias(remuneracao_base, "TST")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-1
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-1")
 ```
 
@@ -922,7 +968,7 @@ plot_tendencias(remuneracao_base, "TRT-1")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-10
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-10")
 ```
 
@@ -931,7 +977,7 @@ plot_tendencias(remuneracao_base, "TRT-10")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-11
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-11")
 ```
 
@@ -940,7 +986,7 @@ plot_tendencias(remuneracao_base, "TRT-11")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-12
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-12")
 ```
 
@@ -949,7 +995,7 @@ plot_tendencias(remuneracao_base, "TRT-12")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-13
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-13")
 ```
 
@@ -958,7 +1004,7 @@ plot_tendencias(remuneracao_base, "TRT-13")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-14
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-14")
 ```
 
@@ -967,7 +1013,7 @@ plot_tendencias(remuneracao_base, "TRT-14")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-15
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-15")
 ```
 
@@ -976,7 +1022,7 @@ plot_tendencias(remuneracao_base, "TRT-15")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-16
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-16")
 ```
 
@@ -985,7 +1031,7 @@ plot_tendencias(remuneracao_base, "TRT-16")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-17
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-17")
 ```
 
@@ -994,7 +1040,7 @@ plot_tendencias(remuneracao_base, "TRT-17")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-18
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-18")
 ```
 
@@ -1003,7 +1049,7 @@ plot_tendencias(remuneracao_base, "TRT-18")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-19
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-19")
 ```
 
@@ -1012,7 +1058,7 @@ plot_tendencias(remuneracao_base, "TRT-19")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-2
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-2")
 ```
 
@@ -1021,7 +1067,7 @@ plot_tendencias(remuneracao_base, "TRT-2")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-20
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-20")
 ```
 
@@ -1030,7 +1076,7 @@ plot_tendencias(remuneracao_base, "TRT-20")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-21
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-21")
 ```
 
@@ -1039,7 +1085,7 @@ plot_tendencias(remuneracao_base, "TRT-21")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-22
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-22")
 ```
 
@@ -1048,7 +1094,7 @@ plot_tendencias(remuneracao_base, "TRT-22")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-23
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-23")
 ```
 
@@ -1057,7 +1103,7 @@ plot_tendencias(remuneracao_base, "TRT-23")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-24
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-24")
 ```
 
@@ -1066,7 +1112,7 @@ plot_tendencias(remuneracao_base, "TRT-24")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-3
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-3")
 ```
 
@@ -1075,7 +1121,7 @@ plot_tendencias(remuneracao_base, "TRT-3")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-4
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-4")
 ```
 
@@ -1084,7 +1130,7 @@ plot_tendencias(remuneracao_base, "TRT-4")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-5
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-5")
 ```
 
@@ -1093,7 +1139,7 @@ plot_tendencias(remuneracao_base, "TRT-5")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-6
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-6")
 ```
 
@@ -1102,7 +1148,7 @@ plot_tendencias(remuneracao_base, "TRT-6")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-7
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-7")
 ```
 
@@ -1111,7 +1157,7 @@ plot_tendencias(remuneracao_base, "TRT-7")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-8
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-8")
 ```
 
@@ -1120,7 +1166,7 @@ plot_tendencias(remuneracao_base, "TRT-8")
 ```{r, , results='asis'}
 #| label: JustiçadoTrabalhoTRT-9
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "TRT-9")
 ```
 
@@ -1134,7 +1180,7 @@ plot_tendencias(remuneracao_base, "TRT-9")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-AC
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-AC")
 ```
 
@@ -1143,7 +1189,7 @@ plot_tendencias(remuneracao_base, "MP-AC")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-AL
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-AL")
 ```
 
@@ -1152,7 +1198,7 @@ plot_tendencias(remuneracao_base, "MP-AL")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-AM
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-AM")
 ```
 
@@ -1161,7 +1207,7 @@ plot_tendencias(remuneracao_base, "MP-AM")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-AP
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-AP")
 ```
 
@@ -1170,7 +1216,7 @@ plot_tendencias(remuneracao_base, "MP-AP")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-BA
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-BA")
 ```
 
@@ -1179,7 +1225,7 @@ plot_tendencias(remuneracao_base, "MP-BA")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-CE
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-CE")
 ```
 
@@ -1188,7 +1234,7 @@ plot_tendencias(remuneracao_base, "MP-CE")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-DFT
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-DFT")
 ```
 
@@ -1197,7 +1243,7 @@ plot_tendencias(remuneracao_base, "MP-DFT")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-ES
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-ES")
 ```
 
@@ -1206,7 +1252,7 @@ plot_tendencias(remuneracao_base, "MP-ES")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMPF
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MPF")
 ```
 
@@ -1215,7 +1261,7 @@ plot_tendencias(remuneracao_base, "MPF")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-GO
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-GO")
 ```
 
@@ -1224,7 +1270,7 @@ plot_tendencias(remuneracao_base, "MP-GO")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMPM
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MPM")
 ```
 
@@ -1233,7 +1279,7 @@ plot_tendencias(remuneracao_base, "MPM")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-MA
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-MA")
 ```
 
@@ -1242,7 +1288,7 @@ plot_tendencias(remuneracao_base, "MP-MA")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-MG
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-MG")
 ```
 
@@ -1251,7 +1297,7 @@ plot_tendencias(remuneracao_base, "MP-MG")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-MS
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-MS")
 ```
 
@@ -1260,7 +1306,7 @@ plot_tendencias(remuneracao_base, "MP-MS")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-MT
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-MT")
 ```
 
@@ -1269,7 +1315,7 @@ plot_tendencias(remuneracao_base, "MP-MT")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-PA
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-PA")
 ```
 
@@ -1278,7 +1324,7 @@ plot_tendencias(remuneracao_base, "MP-PA")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-PB
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-PB")
 ```
 
@@ -1287,7 +1333,7 @@ plot_tendencias(remuneracao_base, "MP-PB")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-PE
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-PE")
 ```
 
@@ -1296,7 +1342,7 @@ plot_tendencias(remuneracao_base, "MP-PE")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-PI
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-PI")
 ```
 
@@ -1305,7 +1351,7 @@ plot_tendencias(remuneracao_base, "MP-PI")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-PR
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-PR")
 ```
 
@@ -1314,7 +1360,7 @@ plot_tendencias(remuneracao_base, "MP-PR")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-RJ
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-RJ")
 ```
 
@@ -1323,7 +1369,7 @@ plot_tendencias(remuneracao_base, "MP-RJ")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-RN
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-RN")
 ```
 
@@ -1332,7 +1378,7 @@ plot_tendencias(remuneracao_base, "MP-RN")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-RO
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-RO")
 ```
 
@@ -1341,7 +1387,7 @@ plot_tendencias(remuneracao_base, "MP-RO")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-RR
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-RR")
 ```
 
@@ -1350,7 +1396,7 @@ plot_tendencias(remuneracao_base, "MP-RR")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-RS
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-RS")
 ```
 
@@ -1359,7 +1405,7 @@ plot_tendencias(remuneracao_base, "MP-RS")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-SC
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-SC")
 ```
 
@@ -1368,7 +1414,7 @@ plot_tendencias(remuneracao_base, "MP-SC")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-SE
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-SE")
 ```
 
@@ -1377,7 +1423,7 @@ plot_tendencias(remuneracao_base, "MP-SE")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-SP
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-SP")
 ```
 
@@ -1386,7 +1432,7 @@ plot_tendencias(remuneracao_base, "MP-SP")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMPT
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MPT")
 ```
 
@@ -1395,7 +1441,7 @@ plot_tendencias(remuneracao_base, "MPT")
 ```{r, , results='asis'}
 #| label: MinistériosPúblicosMP-TO
 #| fig-width: 25
-#| fig-height: 10
+#| fig-height: 15
 plot_tendencias(remuneracao_base, "MP-TO")
 ```
 
