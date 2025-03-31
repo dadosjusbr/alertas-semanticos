@@ -8,7 +8,7 @@ format:
   dashboard:
     theme: cosmo
     expandable: false
-    scrolling: false
+    scrolling: true
     embed-resources: false
     clean: false
 ---
@@ -59,7 +59,72 @@ remuneracao_base <- remuneracao_base %>%
             NA_real_, media_movel_3_anos
         )
     )
+```
 
+```{r, results = 'asis'}
+calcular_qtd_meses_coleta <- function() {
+    data_atual <- Sys.Date()
+
+    if (day(data_atual) < 16) {
+        data_atual <- as.Date(format(data_atual, "%Y-%m-01")) - 1
+    }
+
+    data_inicio <- as.Date("2018-01-01")
+
+    qtd_meses <- (year(data_atual) - year(data_inicio)) * 12 + month(data_atual) - month(data_inicio)
+
+    return(qtd_meses)
+}
+```
+
+```{r, results = 'asis'}
+plot_cards <- function(status) {
+    acima <- sum(status$metrica == "Acima das tendências")
+    abaixo <- sum(status$metrica == "Abaixo das tendências")
+    normal <- sum(status$metrica == "Valores normais")
+    qtd_meses <- calcular_qtd_meses_coleta() - nrow(status)
+
+    cat("::: {style=\"display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 10px; margin-left: 30px; margin-right: 30px;\"}\n\n")
+
+    cat(
+        "::: {.valuebox icon=\"calendar-x\" color=\"#ffc222\"}\n",
+        "**Meses ausentes**",
+        "\n\n",
+        qtd_meses,
+        "\n\n<small>*Quantidade de meses não publicados e/ou sem dados para esta categoria.*</small>",
+        "\n:::\n"
+    )
+
+    cat(
+        "::: {.valuebox icon=\"graph-up-arrow\" color=\"blue\"}\n",
+        "**Acima das tendências**",
+        "\n\n",
+        acima,
+        "\n\n<small>*Meses com valor superior às médias recentes (3 meses e 3 anos).*</small>",
+        "\n:::\n"
+    )
+    cat(
+        "::: {.valuebox icon=\"graph-down-arrow\" color=\"blue\"}\n",
+        "**Abaixo das tendências**",
+        "\n\n",
+        abaixo,
+        "\n\n<small>*Meses com valor inferior às médias recentes (3 meses e 3 anos).*</small>",
+        "\n:::\n"
+    )
+    cat(
+        "::: {.valuebox icon=\"check-circle\" color=\"green\"}\n",
+        "**Valores normais**",
+        "\n\n",
+        normal,
+        "\n\n<small>*Meses com valor dentro das médias recentes.*</small>",
+        "\n:::\n"
+    )
+
+    cat("\n:::\n")
+}
+```
+
+```{r, results = 'asis'}
 plot_tendencias <- function(df_remuneracao_base, orgao) {
     dados <- df_remuneracao_base %>%
         filter(lbl_orgao == orgao)
@@ -75,19 +140,6 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
         Órgão não realizou pagamentos desta categoria neste período
         \n:::\n")
     } else {
-        dados_filtrados <- dados[dados$ano_mes <= as.Date(format(Sys.Date(), "%Y-%m-01")), ]
-
-        meses_ausentes <- dados_filtrados %>%
-            filter(is.na(valor)) %>%
-            summarise(qtd = n()) %>%
-            pull(qtd) - 2
-
-        if (meses_ausentes > 0) {
-            cat("::: {.callout-warning}
-    Este órgão não publicou dados de ", meses_ausentes, " meses
-    \n:::\n")
-        }
-
         status <- dados %>%
             filter(!is.na(valor)) %>%
             transmute(
@@ -102,8 +154,10 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
                     (valor < media_movel_3_meses) & (valor < media_movel_3_anos) ~ "Abaixo das tendências",
                     .default = "Valores normais"
                 ),
-                valor = 500,
+                valor = valor,
             )
+
+        plot_cards(status)
 
         grp <- unique(dados$grupo)
 
@@ -127,8 +181,8 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
             "media_movel_3_meses" = cores_dadosjusbr[["cinza_azulado"]],
             "media_movel_3_anos" = cores_dadosjusbr[["lilas"]],
             "valor" = cores_dadosjusbr[["cyan"]],
-            "Acima das tendências" = cores_aep[["vermelho"]],
-            "Abaixo das tendências" = cores_tb[["vermelho_tadepe"]],
+            "Acima das tendências" = "#dfc27d",
+            "Abaixo das tendências" = "#a6611a",
             "Valores normais" = "transparent"
         )
 
@@ -143,6 +197,10 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
                 aes(y = valor, fill = metrica),
                 alpha = .6
             ) +
+            geom_col(
+                data = ~ filter(., !metrica %in% c("media_movel_3_meses", "media_movel_3_anos", "valor")),
+                aes(y = valor, fill = metrica),
+            ) +
             geom_line(
                 data = ~ filter(., metrica == "media_movel_3_meses"),
                 linewidth = 1,
@@ -152,11 +210,6 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
                 size = 15,
                 shape = "-",
                 data = ~ filter(., metrica == "media_movel_3_meses"),
-                aes(y = valor, color = metrica)
-            ) +
-            geom_point(
-                data = ~ filter(., !metrica %in% c("media_movel_3_meses", "media_movel_3_anos", "valor")),
-                size = 5,
                 aes(y = valor, color = metrica)
             ) +
             scale_color_manual(values = plt, labels = lbls) +
@@ -174,7 +227,7 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
             ) +
             labs(
                 title = sprintf("%s | %s", orgao, grp),
-                subtitle = "Média móvel de 3 meses",
+                subtitle = "**Média móvel de 3 meses**",
                 x = "ano e mês",
                 y = "Remuneração base total (R$ milhões)",
                 fill = "",
@@ -193,6 +246,10 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
                 aes(y = valor, fill = metrica),
                 alpha = .6
             ) +
+            geom_col(
+                data = ~ filter(., !metrica %in% c("media_movel_3_meses", "media_movel_3_anos", "valor")),
+                aes(y = valor, fill = metrica),
+            ) +
             geom_line(
                 data = ~ filter(., metrica == "media_movel_3_anos"),
                 linewidth = 1,
@@ -202,11 +259,6 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
                 size = 15,
                 shape = "-",
                 data = ~ filter(., metrica == "media_movel_3_anos"),
-                aes(y = valor, color = metrica)
-            ) +
-            geom_point(
-                data = ~ filter(., !metrica %in% c("media_movel_3_meses", "media_movel_3_anos", "valor")),
-                size = 5,
                 aes(y = valor, color = metrica)
             ) +
             scale_color_manual(values = plt, labels = lbls) +
@@ -223,7 +275,7 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
                 limits = c(0, y_lim)
             ) +
             labs(
-                subtitle = "Média móvel de 3 anos",
+                subtitle = "**Média móvel de 3 anos**",
                 x = "ano e mês",
                 y = "Remuneração base total (R$ milhões)",
                 fill = "",
@@ -232,7 +284,7 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
             theme(legend.position = "none")
 
         plot_final <- plot_mes / plot_ano +
-            plot_layout(guides = "auto") &
+            plot_layout(guides = "collect") &
             theme(
                 legend.position = "top",
                 legend.direction = "horizontal",
@@ -242,8 +294,8 @@ plot_tendencias <- function(df_remuneracao_base, orgao) {
                 panel.spacing = unit(2, "mm")
             ) &
             guides(
-                color = guide_legend(nrow = 1),
-                fill = guide_legend(nrow = 1)
+                color = guide_legend(ncol = 1),
+                fill = guide_legend(nrow = 3)
             )
 
         plot_final
