@@ -6,7 +6,7 @@ source(here("setup/00-usar-db.R"), encoding = "utf-8")
 
 # QUERY 1 ========================================================================
 
-query_file <- here("tasks/view-remuneracao-base/src/01-extracao.sql")
+query_file <- here("tasks/view-outras-remuneracoes/src/01-extracao.sql")
 
 
 #' Read SQL query from file
@@ -74,7 +74,7 @@ orgaos <- orgaos %>% mutate(mes = month(ano_mes), ano = year(ano_mes))
 
 remuneracao_base <- left_join(orgaos, remuneracao_base)
 
-CAMINHO_OUTPUT <- here("tasks/view-remuneracao-base/outputs", today())
+CAMINHO_OUTPUT <- here("tasks/view-outras-remuneracoes/outputs", today())
 if (!dir.exists(CAMINHO_OUTPUT)) dir.create(CAMINHO_OUTPUT)
 
 CAMINHO_OUTPUT_FILE <- sprintf("%s/extracao.rds", CAMINHO_OUTPUT)
