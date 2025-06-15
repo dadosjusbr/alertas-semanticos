@@ -22,9 +22,14 @@ jobs:
       - name: Instalar Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Instalar dependências do sistema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev libgit2-dev
+
       - name: Instalar pacotes R necessários
         run: |
-          Rscript -e 'install.packages(c("quarto", "dotenv", "tidyverse", "here", "zoo", "patchwork"))'
+          Rscript -e 'install.packages(c("quarto", "dotenv", "tidyverse", "here", "zoo", "patchwork"), dependencies = TRUE)'
 
       - name: Realizar extração do banco
         run: |
