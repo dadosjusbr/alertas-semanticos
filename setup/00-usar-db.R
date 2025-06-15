@@ -11,13 +11,25 @@
 #' @param host nome do servidor que hospeda o banco
 #' @details hint: {keiring} é um pacote para criptografar localmente dados sensíveis. Substitua o que está em keyring::key_get() pela forma de autenticação de sua preferência.
 #'
+
+# Carregar variáveis do .env
+dotenv::load_dot_env()
+
 use_postgres <- function(
-  dbname = keyring::key_get("dadosjusbr_dbname"),
-  port = 5432,
-  user = keyring::key_get("dadosjusbr_dbuser"),
-  password = keyring::key_get("dadosjusbr_dbsecret"),
-  host = keyring::key_get("dadosjusbr_dbhost")
-) {
+    port = 5432) {
+  if (Sys.getenv("GITHUB_ACTIONS") == "true") {
+    # Ambiente do GitHub Actions → usar variáveis de ambiente
+    dbname <- Sys.getenv("DADOSJUSBR_DBNAME")
+    user <- Sys.getenv("DADOSJUSBR_DBUSER")
+    password <- Sys.getenv("DADOSJUSBR_DBSECRET")
+    host <- Sys.getenv("DADOSJUSBR_DBHOST")
+  } else {
+    # Ambiente local → usar keyring
+    dbname <- keyring::key_get("dadosjusbr_dbname")
+    user <- keyring::key_get("dadosjusbr_dbuser")
+    password <- keyring::key_get("dadosjusbr_dbsecret")
+    host <- keyring::key_get("dadosjusbr_dbhost")
+  }
 
   message("Conectando ao banco de dados Postrgres - DadosJusBr")
 
@@ -40,7 +52,6 @@ use_postgres <- function(
 #' @param conectar marque TRUE para conectar ao banco de dados antes de fazer a query.
 #' @param quiet ao rodar a função uma mensagem aparece no console, quiet=TRUE desabilita essa mensagem.
 get_query <- function(qry, conectar = FALSE, quiet = FALSE) {
-
   # se quiser reiniciar a comunicação basta indicar `conectar = TRUE`
   if (conectar) use_postgres()
 
