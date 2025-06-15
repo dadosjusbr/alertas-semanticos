@@ -24,7 +24,7 @@ jobs:
 
       - name: Instalar pacotes R necessários
         run: |
-          install.packages(c("quarto", "dotenv", "tidyverse", "here", "zoo", "patchwork"))
+          Rscript -e 'install.packages(c("quarto", "dotenv", "tidyverse", "here", "zoo", "patchwork"))'
 
       - name: Realizar extração do banco
         run: |
