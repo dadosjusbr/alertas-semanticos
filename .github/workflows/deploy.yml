@@ -52,6 +52,7 @@ jobs:
             patchwork
             colorspace
             showtext
+            hrbrthemes
 
       - name: Realizar extração do banco
         run: |
