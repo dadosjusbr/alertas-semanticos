@@ -51,6 +51,7 @@ jobs:
             zoo
             patchwork
             colorspace
+            showtext
 
       - name: Realizar extração do banco
         run: |
