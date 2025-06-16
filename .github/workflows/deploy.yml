@@ -39,8 +39,17 @@ jobs:
           libgit2-dev
 
       - name: Instalar pacotes R necessários
-        run: |
-          Rscript -e 'install.packages(c("quarto", "dotenv", "tidyverse", "here", "zoo", "patchwork"), dependencies = TRUE)'
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            RPostgres
+            DBI
+            dotenv
+            quarto
+            tidyverse
+            here
+            zoo
+            patchwork
 
       - name: Realizar extração do banco
         run: |
