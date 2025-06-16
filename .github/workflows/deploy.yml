@@ -53,6 +53,7 @@ jobs:
             colorspace
             showtext
             hrbrthemes
+            ggtext
 
       - name: Realizar extração do banco
         run: |
