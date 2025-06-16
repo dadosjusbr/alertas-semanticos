@@ -12,9 +12,6 @@
 #' @details hint: {keiring} é um pacote para criptografar localmente dados sensíveis. Substitua o que está em keyring::key_get() pela forma de autenticação de sua preferência.
 #'
 
-# Carregar variáveis do .env
-dotenv::load_dot_env()
-
 use_postgres <- function(
     port = 5432) {
   if (Sys.getenv("GITHUB_ACTIONS") == "true") {
