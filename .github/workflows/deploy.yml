@@ -50,6 +50,7 @@ jobs:
             here
             zoo
             patchwork
+            colorspace
 
       - name: Realizar extração do banco
         run: |
