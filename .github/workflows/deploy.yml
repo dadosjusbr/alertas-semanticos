@@ -61,13 +61,14 @@ jobs:
           DADOSJUSBR_DBSECRET: ${{ secrets.DADOSJUSBR_DBSECRET }}
           DADOSJUSBR_DBHOST: ${{ secrets.DADOSJUSBR_DBHOST }}
 
-    #   - name: Renderizar HTML com Quarto
-    #     run: |
-    #       quarto render
+      - name: Renderizar HTML com Quarto
+        run: |
+          quarto render tasks/view-remuneracao-base/src/02-remuneracao-base.qmd
+          quarto render tasks/view-outras-remuneracoes/src/03-outras-remuneracoes.qmd
 
-    #   - name: Deploy para GitHub Pages
-    #     uses: peaceiris/actions-gh-pages@v3
-    #     with:
-    #       github_token: ${{ secrets.GITHUB_TOKEN }}
-    #       publish_dir: ./_site # ou ./docs, dependendo de onde está seu HTML
-    #       publish_branch: gh-pages # ou main/docs
+      - name: Deploy para GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: view1-rembase
