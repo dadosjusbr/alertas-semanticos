@@ -34,3 +34,8 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+/.quarto/
+docs/tasks
+
+.env
