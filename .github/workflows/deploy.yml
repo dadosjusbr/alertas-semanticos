@@ -6,7 +6,7 @@ on:
   workflow_dispatch: # permite executar manualmente
   push:
     branches:
-      - view1-rembase
+      - main
 
 jobs:
   build-deploy:
